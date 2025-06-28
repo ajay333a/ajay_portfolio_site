@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ExternalLink, Github, Database, BarChart3, X } from "lucide-react";
 
 interface Project {
@@ -15,6 +14,10 @@ interface Project {
 }
 
 const Projects = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const projects: Project[] = [
@@ -23,7 +26,7 @@ const Projects = () => {
       description: "Comprehensive analysis of bike share data to understand user patterns and optimize service delivery. Analyzed 5M+ records using R programming with focus on seasonal trends and user behavior.",
       dataSize: "5M+ Records",
       tools: ["R", "dplyr", "ggplot2", "Statistical Analysis"],
-      link: "https://ajay333a.quarto.pub/ajay333a/posts/cyclistic_rproject/cyclistic_rproject.html",
+      link: "https://ajay333a.quarto.pub/ajay333a/posts/cyclist_trip_analysis/cyclist_bike_202207_202306.html",
       image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500",
       category: "Data Analysis",
       highlights: [
@@ -34,7 +37,7 @@ const Projects = () => {
       ]
     },
     {
-      title: "SQL Music Store Analysis",
+      title: "SQL Amazon Store Analysis",
       description: "Database analysis project demonstrating advanced SQL techniques including complex joins, subqueries, and window functions to extract business insights from music store data.",
       dataSize: "Complex Queries",
       tools: ["MySQL", "Joins", "Subqueries", "Window Functions"],
@@ -63,13 +66,13 @@ const Projects = () => {
     <div className="min-h-screen pt-16">
       <section className="section-container">
         <div className="text-center mb-16 animate-fade-up">
-          <h1 className="text-4xl lg:text-5xl font-inter font-bold text-charcoal mb-6">
+          <h1 className="text-4xl lg:text-5xl font-inter font-bold text-card-foreground mb-6">
             Projects Portfolio
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
+          <p className="text-xl text-foreground max-w-3xl mx-auto mb-4">
             Practical, real-world analytics using real-world data
           </p>
-          <p className="text-lg text-gray-500">
+          <p className="text-lg text-muted-foreground">
             Click on any project to see detailed insights and methodologies
           </p>
         </div>
@@ -78,7 +81,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-lg overflow-hidden card-hover cursor-pointer animate-fade-up"
+              className="bg-card border border-border rounded-xl shadow-lg overflow-hidden card-hover cursor-pointer animate-fade-up"
               style={{animationDelay: `${index * 0.1}s`}}
               onClick={() => openModal(project)}
             >
@@ -89,24 +92,24 @@ const Projects = () => {
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
                 <div className="absolute top-4 left-4">
-                  <span className="bg-teal text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
                     {project.category}
                   </span>
                 </div>
               </div>
 
               <div className="p-6">
-                <h3 className="text-xl font-inter font-semibold text-charcoal mb-3">
+                <h3 className="text-xl font-inter font-semibold text-card-foreground mb-3">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 mb-4 line-clamp-3">
+                <p className="text-foreground mb-4 line-clamp-3">
                   {project.description}
                 </p>
 
                 <div className="flex items-center gap-4 mb-4">
                   <div className="flex items-center gap-1">
                     <Database size={16} className="text-teal" />
-                    <span className="text-sm font-medium text-charcoal">{project.dataSize}</span>
+                    <span className="text-sm font-medium text-card-foreground">{project.dataSize}</span>
                   </div>
                 </div>
 
@@ -114,13 +117,13 @@ const Projects = () => {
                   {project.tools.slice(0, 3).map((tool, idx) => (
                     <span
                       key={idx}
-                      className="bg-teal-50 text-teal px-3 py-1 rounded-full text-sm font-medium"
+                      className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-medium"
                     >
                       {tool}
                     </span>
                   ))}
                   {project.tools.length > 3 && (
-                    <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm font-medium">
+                    <span className="bg-muted text-muted-foreground px-3 py-1 rounded-full text-sm font-medium">
                       +{project.tools.length - 3} more
                     </span>
                   )}
@@ -131,7 +134,7 @@ const Projects = () => {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-teal hover:text-teal-700 font-medium"
+                    className="flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <ExternalLink size={16} />
@@ -142,7 +145,7 @@ const Projects = () => {
                       href={project.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-gray-600 hover:text-charcoal font-medium"
+                      className="flex items-center gap-2 text-muted-foreground hover:text-card-foreground font-medium"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <Github size={16} />
@@ -158,7 +161,7 @@ const Projects = () => {
         {/* Project Modal */}
         {selectedProject && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-card border border-border rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
               <div className="relative">
                 <img
                   src={selectedProject.image}
@@ -167,7 +170,7 @@ const Projects = () => {
                 />
                 <button
                   onClick={closeModal}
-                  className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100"
+                  className="absolute top-4 right-4 bg-card rounded-full p-2 shadow-lg hover:bg-accent"
                 >
                   <X size={20} />
                 </button>
@@ -175,38 +178,38 @@ const Projects = () => {
 
               <div className="p-8">
                 <div className="mb-4">
-                  <span className="bg-teal text-white px-3 py-1 rounded-full text-sm font-medium">
+                  <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
                     {selectedProject.category}
                   </span>
                 </div>
 
-                <h2 className="text-2xl font-inter font-bold text-charcoal mb-4">
+                <h2 className="text-2xl font-inter font-bold text-card-foreground mb-4">
                   {selectedProject.title}
                 </h2>
 
-                <p className="text-gray-700 mb-6 leading-relaxed">
+                <p className="text-foreground mb-6 leading-relaxed">
                   {selectedProject.description}
                 </p>
 
                 <div className="mb-6">
-                  <h3 className="font-semibold text-charcoal mb-3">Key Highlights:</h3>
+                  <h3 className="font-semibold text-card-foreground mb-3">Key Highlights:</h3>
                   <ul className="space-y-2">
                     {selectedProject.highlights.map((highlight, idx) => (
                       <li key={idx} className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-teal rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-gray-700">{highlight}</span>
+                        <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                        <span className="text-foreground">{highlight}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
                 <div className="mb-6">
-                  <h3 className="font-semibold text-charcoal mb-3">Tools & Technologies:</h3>
+                  <h3 className="font-semibold text-card-foreground mb-3">Tools & Technologies:</h3>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.tools.map((tool, idx) => (
                       <span
                         key={idx}
-                        className="bg-teal-50 text-teal px-3 py-1 rounded-full text-sm font-medium"
+                        className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-medium"
                       >
                         {tool}
                       </span>

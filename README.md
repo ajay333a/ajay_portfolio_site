@@ -1,73 +1,69 @@
-# Welcome to your Lovable project
+# Ajay Shankar A — Portfolio Website
 
-## Project info
+A modern, theme-aware portfolio website for Ajay Shankar A, a data analyst passionate about insights, impact, and storytelling.
 
-**URL**: https://lovable.dev/projects/9f487fa3-9758-46c4-90ca-04ff3dd4f18f
+## 🌐 Live Site
 
-## How can I edit this code?
+[ajay-shankar-portfolio-site](https://lovable.dev/projects/9f487fa3-9758-46c4-90ca-04ff3dd4f18f)
 
-There are several ways of editing your application.
+## ✨ Features
 
-**Use Lovable**
+- **Responsive & Accessible**: Works beautifully on all devices and is accessible in India and globally.
+- **Theme-Aware Design**: Light/dark mode, teal accent, and consistent card/section styling.
+- **Smooth Navigation**: Always starts at the top of each page.
+- **Data-Driven Visuals**: Data-themed favicon and modern UI.
+- **Content Sections**:
+  - Hero & About
+  - Education
+  - Skills & Tools
+  - Experience
+  - Projects
+  - Certifications
+  - Blog (with accessible, relevant images)
+  - Contact (with form & social links)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/9f487fa3-9758-46c4-90ca-04ff3dd4f18f) and start prompting.
+## 🛠️ Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+- [Vite](https://vitejs.dev/) — Fast build tool
+- [React](https://react.dev/) — UI library
+- [TypeScript](https://www.typescriptlang.org/) — Type safety
+- [Tailwind CSS](https://tailwindcss.com/) — Utility-first CSS
+- [shadcn/ui](https://ui.shadcn.com/) — Accessible React components
 
-**Use your preferred IDE**
+## 🚀 Getting Started
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
+- Node.js & npm (recommended: use [nvm](https://github.com/nvm-sh/nvm#installing-and-updating))
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
+### Local Development
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# Clone the repository
 git clone <YOUR_GIT_URL>
+cd ajay-shankar-portfolio-site
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Install dependencies
+npm install
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Editing
+- Use your favorite IDE, GitHub, or [Lovable](https://lovable.dev/projects/9f487fa3-9758-46c4-90ca-04ff3dd4f18f) for prompt-based editing.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🖼️ Customization
+- **Favicon**: Uses a data-themed icon (`public/favicon.ico` and `public/favicon.svg`).
+- **Theme**: Easily adjust colors in `tailwind.config.ts` and `src/index.css`.
+- **Content**: Update sections in `src/pages/` as needed.
 
-**Use GitHub Codespaces**
+## 🌍 Deployment
+- Deploy instantly via [Lovable](https://lovable.dev/projects/9f487fa3-9758-46c4-90ca-04ff3dd4f18f) (Share → Publish).
+- Or use your preferred static hosting (Vercel, Netlify, etc.).
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🔗 Custom Domain
+- Connect a custom domain in Lovable: Project → Settings → Domains → Connect Domain.
+- [Read the guide](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
 
-## What technologies are used for this project?
+## 📄 License
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/9f487fa3-9758-46c4-90ca-04ff3dd4f18f) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is for personal portfolio use. Feel free to fork and adapt for your own portfolio!

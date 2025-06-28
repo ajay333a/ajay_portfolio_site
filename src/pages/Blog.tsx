@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ExternalLink, Clock, Tag } from "lucide-react";
 
 interface BlogPost {
@@ -13,26 +12,30 @@ interface BlogPost {
 }
 
 const Blog = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [activeFilter, setActiveFilter] = useState<"All" | "Python" | "R">("All");
 
   const blogPosts: BlogPost[] = [
     {
-      title: "Cyclistic Bike Share Analysis with R",
+      title: "Medicines Side-effects Analysis with R",
       category: "R",
-      summary: "Deep dive into bike share data analysis using R, exploring user patterns and seasonal trends with ggplot2 and dplyr.",
+      summary: "Deep dive into medicines use analysis using R, exploring user patterns and seasonal trends with ggplot2 and dplyr.",
       readTime: "15 min read",
       tags: ["R", "Data Analysis", "ggplot2", "dplyr"],
-      link: "https://ajay333a.quarto.pub/ajay333a/posts/cyclistic_rproject/cyclistic_rproject.html",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500"
+      link: "https://ajay333a.quarto.pub/ajay333a/posts/meds_analysis/Medicines_usage_sideeffects.html",
+      image: "https://images.pexels.com/photos/593451/pexels-photo-593451.jpeg?auto=compress&w=500" // Pexels, healthcare/pills, accessible in India
     },
     {
-      title: "Python Data Analysis Tutorials",
+      title: "Cyclist Trip Analysis with Python",
       category: "Python",
-      summary: "Comprehensive tutorials covering Python data analysis techniques, pandas operations, and visualization best practices.",
+      summary: "Analysis of cyclist trip data using Python, focusing on trip patterns, duration analysis, and visualization with pandas.",
       readTime: "12 min read",
       tags: ["Python", "Pandas", "Data Science", "Visualization"],
-      link: "https://ajay333a.quarto.pub/python_blog/",
-      image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=500"
+      link: "https://ajay333a.quarto.pub/python_blog/posts/cyclist_trip_analysis/cyc_trip_analysis.html",
+      image: "https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg?auto=compress&w=500" // Pexels, clear image of cyclists on bikes
     }
   ];
 
@@ -44,25 +47,25 @@ const Blog = () => {
     <div className="min-h-screen pt-16">
       <section className="section-container">
         <div className="text-center mb-16 animate-fade-up">
-          <h1 className="text-4xl lg:text-5xl font-inter font-bold text-charcoal mb-6">
+          <h1 className="text-4xl lg:text-5xl font-inter font-bold text-card-foreground mb-6">
             Blog & Tutorials
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-foreground max-w-3xl mx-auto">
             Sharing insights, tutorials, and learnings from my data analytics journey
           </p>
         </div>
 
         {/* Filter Tabs */}
         <div className="flex justify-center mb-12 animate-fade-up">
-          <div className="bg-gray-100 p-1 rounded-lg">
+          <div className="bg-muted p-1 rounded-lg">
             {["All", "Python", "R"].map((filter) => (
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter as "All" | "Python" | "R")}
                 className={`px-6 py-2 rounded-md font-medium transition-all duration-200 ${
                   activeFilter === filter
-                    ? "bg-teal text-white shadow-sm"
-                    : "text-gray-600 hover:text-charcoal"
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-card-foreground"
                 }`}
               >
                 {filter} Blog{filter !== "All" ? "s" : ""}
@@ -76,7 +79,7 @@ const Blog = () => {
           {filteredPosts.map((post, index) => (
             <article
               key={index}
-              className="bg-white rounded-xl shadow-lg overflow-hidden card-hover animate-fade-up"
+              className="bg-card border border-border rounded-xl shadow-lg overflow-hidden card-hover animate-fade-up"
               style={{animationDelay: `${index * 0.1}s`}}
             >
               <div className="relative h-48 overflow-hidden">
@@ -95,15 +98,15 @@ const Blog = () => {
               </div>
 
               <div className="p-6">
-                <h3 className="text-xl font-inter font-semibold text-charcoal mb-3">
+                <h3 className="text-xl font-inter font-semibold text-card-foreground mb-3">
                   {post.title}
                 </h3>
 
-                <p className="text-gray-600 mb-4 leading-relaxed">
+                <p className="text-foreground mb-4 leading-relaxed">
                   {post.summary}
                 </p>
 
-                <div className="flex items-center gap-4 mb-4 text-sm text-gray-500">
+                <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
                   <div className="flex items-center gap-1">
                     <Clock size={16} />
                     <span>{post.readTime}</span>
@@ -114,7 +117,7 @@ const Blog = () => {
                   {post.tags.map((tag, idx) => (
                     <span
                       key={idx}
-                      className="flex items-center gap-1 bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
+                      className="flex items-center gap-1 bg-muted text-muted-foreground px-3 py-1 rounded-full text-sm"
                     >
                       <Tag size={12} />
                       {tag}
@@ -138,11 +141,11 @@ const Blog = () => {
 
         {/* Blog Links Section */}
         <div className="mt-16 grid md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-fade-up">
-          <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-xl text-center">
-            <h3 className="text-2xl font-inter font-semibold text-charcoal mb-4">
+          <div className="bg-card border border-border rounded-xl p-8 max-w-2xl mx-auto">
+            <h3 className="text-2xl font-inter font-semibold text-card-foreground mb-4">
               R Programming Blog
             </h3>
-            <p className="text-gray-700 mb-6">
+            <p className="text-foreground mb-6">
               Explore my R programming journey with practical tutorials and real-world data analysis projects.
             </p>
             <a
@@ -156,11 +159,11 @@ const Blog = () => {
             </a>
           </div>
 
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl text-center">
-            <h3 className="text-2xl font-inter font-semibold text-charcoal mb-4">
+          <div className="bg-card border border-border rounded-xl p-8 max-w-2xl mx-auto">
+            <h3 className="text-2xl font-inter font-semibold text-card-foreground mb-4">
               Python Data Science Blog
             </h3>
-            <p className="text-gray-700 mb-6">
+            <p className="text-foreground mb-6">
               Discover Python data science techniques, pandas operations, and advanced analytics methodologies.
             </p>
             <a

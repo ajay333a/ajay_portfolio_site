@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Linkedin, Github, Download, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -11,6 +10,10 @@ const Contact = () => {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { toast } = useToast();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -82,7 +85,7 @@ const Contact = () => {
       icon: <Download size={20} />,
       label: "Resume",
       value: "Download PDF",
-      href: "/assets/ajay_resume.pdf"
+      href: "https://drive.google.com/file/d/1K6RYvsS-0TAjO92ELMndgQN7yo9mE8sb/view?usp=drive_link"
     }
   ];
 
@@ -90,10 +93,10 @@ const Contact = () => {
     <div className="min-h-screen pt-16">
       <section className="section-container">
         <div className="text-center mb-16 animate-fade-up">
-          <h1 className="text-4xl lg:text-5xl font-inter font-bold text-charcoal mb-6">
+          <h1 className="text-4xl lg:text-5xl font-inter font-bold text-card-foreground mb-6">
             Get In Touch
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-foreground max-w-3xl mx-auto">
             Let's discuss data analytics opportunities, collaborations, or just connect!
           </p>
         </div>
@@ -101,14 +104,14 @@ const Contact = () => {
         <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div className="animate-fade-up">
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-2xl font-inter font-semibold text-charcoal mb-6">
+            <div className="bg-card border border-border rounded-xl shadow-lg p-8">
+              <h2 className="text-2xl font-inter font-semibold text-card-foreground mb-6">
                 Send a Message
               </h2>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-charcoal mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-card-foreground mb-2">
                     Name *
                   </label>
                   <input
@@ -117,8 +120,8 @@ const Contact = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal transition-colors ${
-                      errors.name ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-colors ${
+                      errors.name ? "border-red-500" : "border-border"
                     }`}
                     placeholder="Your full name"
                   />
@@ -128,7 +131,7 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-charcoal mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-card-foreground mb-2">
                     Email *
                   </label>
                   <input
@@ -137,8 +140,8 @@ const Contact = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal transition-colors ${
-                      errors.email ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-colors ${
+                      errors.email ? "border-red-500" : "border-border"
                     }`}
                     placeholder="your.email@example.com"
                   />
@@ -148,7 +151,7 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-charcoal mb-2">
+                  <label htmlFor="message" className="block text-sm font-medium text-card-foreground mb-2">
                     Message *
                   </label>
                   <textarea
@@ -157,8 +160,8 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     rows={6}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal transition-colors resize-none ${
-                      errors.message ? "border-red-500" : "border-gray-300"
+                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-colors resize-none ${
+                      errors.message ? "border-red-500" : "border-border"
                     }`}
                     placeholder="Tell me about your project, opportunity, or just say hello... (minimum 30 characters)"
                   />
@@ -166,7 +169,7 @@ const Contact = () => {
                     {errors.message && (
                       <p className="text-sm text-red-500">{errors.message}</p>
                     )}
-                    <p className="text-sm text-gray-500 ml-auto">
+                    <p className="text-sm text-muted-foreground ml-auto">
                       {formData.message.length}/30 minimum
                     </p>
                   </div>
@@ -186,8 +189,8 @@ const Contact = () => {
           {/* Contact Information */}
           <div className="animate-fade-up" style={{animationDelay: "0.1s"}}>
             <div className="space-y-8">
-              <div className="bg-white rounded-xl shadow-lg p-8">
-                <h2 className="text-2xl font-inter font-semibold text-charcoal mb-6">
+              <div className="bg-card border border-border rounded-xl shadow-lg p-8">
+                <h2 className="text-2xl font-inter font-semibold text-card-foreground mb-6">
                   Connect With Me
                 </h2>
                 
@@ -198,29 +201,29 @@ const Contact = () => {
                       href={link.href}
                       target={link.href.startsWith('http') ? '_blank' : undefined}
                       rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="flex items-center gap-4 p-4 rounded-lg border border-gray-200 hover:border-teal hover:bg-teal-50 transition-all duration-200 group"
+                      className="flex items-center gap-4 p-4 rounded-lg border border-border hover:border-primary hover:bg-accent transition-all duration-200 group"
                     >
-                      <div className="text-teal group-hover:scale-110 transition-transform">
+                      <div className="text-primary group-hover:scale-110 transition-transform">
                         {link.icon}
                       </div>
                       <div>
-                        <div className="font-medium text-charcoal">{link.label}</div>
-                        <div className="text-gray-600 text-sm">{link.value}</div>
+                        <div className="font-medium text-card-foreground">{link.label}</div>
+                        <div className="text-muted-foreground text-sm">{link.value}</div>
                       </div>
                     </a>
                   ))}
                 </div>
               </div>
 
-              <div className="bg-teal-50 rounded-xl p-8">
-                <h3 className="text-xl font-inter font-semibold text-charcoal mb-4">
+              <div className="bg-muted rounded-xl p-8">
+                <h3 className="text-xl font-inter font-semibold text-card-foreground mb-4">
                   Looking for collaboration?
                 </h3>
-                <p className="text-gray-700 mb-4">
+                <p className="text-foreground mb-4">
                   I'm always interested in discussing data analytics projects, 
                   research opportunities, and potential collaborations.
                 </p>
-                <p className="text-gray-700">
+                <p className="text-foreground">
                   <strong>Response time:</strong> I typically respond within 24-48 hours.
                 </p>
               </div>

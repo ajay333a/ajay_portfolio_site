@@ -1,12 +1,16 @@
-
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Download, GraduationCap, Code, Briefcase, FolderOpen, Award, BookOpen, Mail } from "lucide-react";
 
 const Index = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="section-container pt-20 pb-32">
+      <section className="section-container pt-8 pb-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="animate-fade-up">
             <h1 className="text-5xl lg:text-6xl font-inter font-bold text-charcoal mb-6 leading-tight">
@@ -17,8 +21,9 @@ const Index = () => {
               Data Analyst passionate about insights, impact & storytelling
             </p>
             <p className="text-lg text-gray-500 mb-12 max-w-lg">
-              Google-certified analyst with a Master's in Forest Biology, 
-              transforming raw data into stories and strategy.
+              Google Certified Data analyst with 3 years of experience in analytics,
+               passionate about data analytics with a master’s degree in Forest Biology and Tree Improvement.
+                Seeking opportunities where I can utilize my analytical and technical skills to solve real life data analytics problems.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
@@ -30,7 +35,7 @@ const Index = () => {
                 <ArrowRight size={20} />
               </Link>
               <a
-                href="/assets/ajay_resume.pdf"
+                href="https://drive.google.com/file/d/1K6RYvsS-0TAjO92ELMndgQN7yo9mE8sb/view?usp=sharing" // Updated to actual resume link
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary inline-flex items-center gap-2"
@@ -57,9 +62,9 @@ const Index = () => {
       </section>
 
       {/* Website Summary Section */}
-      <section className="bg-gray-50 dark:bg-gray-900 py-20">
+      <section className="bg-gray-50 dark:bg-gray-900 py-4">
         <div className="section-container">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <h2 className="text-3xl font-inter font-bold text-charcoal dark:text-white mb-4">
               Explore My Portfolio
             </h2>
@@ -69,7 +74,7 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Link to="/education" className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover group">
+            <Link to="/education" className="bg-card border border-border dark:bg-card p-6 rounded-xl shadow-lg card-hover group">
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 bg-teal/10 rounded-lg">
                   <GraduationCap className="text-teal" size={24} />
@@ -84,7 +89,7 @@ const Index = () => {
               <div className="text-sm text-teal font-medium">CGPA: 8.61 • Research Experience</div>
             </Link>
 
-            <Link to="/skills" className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover group">
+            <Link to="/skills" className="bg-card border border-border dark:bg-card p-6 rounded-xl shadow-lg card-hover group">
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 bg-teal/10 rounded-lg">
                   <Code className="text-teal" size={24} />
@@ -99,7 +104,7 @@ const Index = () => {
               <div className="text-sm text-teal font-medium">Python • R • SQL • Power BI</div>
             </Link>
 
-            <Link to="/experience" className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover group">
+            <Link to="/experience" className="bg-card border border-border dark:bg-card p-6 rounded-xl shadow-lg card-hover group">
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 bg-teal/10 rounded-lg">
                   <Briefcase className="text-teal" size={24} />
@@ -114,7 +119,7 @@ const Index = () => {
               <div className="text-sm text-teal font-medium">MGNREGA • Policy Analytics</div>
             </Link>
 
-            <Link to="/projects" className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover group">
+            <Link to="/projects" className="bg-card border border-border dark:bg-card p-6 rounded-xl shadow-lg card-hover group">
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 bg-teal/10 rounded-lg">
                   <FolderOpen className="text-teal" size={24} />
@@ -129,7 +134,7 @@ const Index = () => {
               <div className="text-sm text-teal font-medium">5M+ Records • Real Data</div>
             </Link>
 
-            <Link to="/certifications" className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover group">
+            <Link to="/certifications" className="bg-card border border-border dark:bg-card p-6 rounded-xl shadow-lg card-hover group">
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 bg-teal/10 rounded-lg">
                   <Award className="text-teal" size={24} />
@@ -144,7 +149,7 @@ const Index = () => {
               <div className="text-sm text-teal font-medium">Google Certified • SQL Expert</div>
             </Link>
 
-            <Link to="/blog" className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover group">
+            <Link to="/blog" className="bg-card border border-border dark:bg-card p-6 rounded-xl shadow-lg card-hover group">
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 bg-teal/10 rounded-lg">
                   <BookOpen className="text-teal" size={24} />
@@ -160,8 +165,8 @@ const Index = () => {
             </Link>
           </div>
 
-          <div className="text-center mt-12">
-            <Link to="/contact" className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg card-hover inline-block group min-w-80">
+          <div className="text-center mt-6">
+            <Link to="/contact" className="bg-card border border-border dark:bg-card p-6 rounded-xl shadow-lg card-hover inline-block group min-w-80">
               <div className="flex items-center justify-center gap-4 mb-4">
                 <div className="p-3 bg-teal/10 rounded-lg">
                   <Mail className="text-teal" size={24} />
@@ -180,9 +185,9 @@ const Index = () => {
       </section>
 
       {/* Quick Overview */}
-      <section className="py-20">
+      <section className="bg-background dark:bg-background py-4">
         <div className="section-container">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <h2 className="text-3xl font-inter font-bold text-charcoal dark:text-white mb-4">
               Quick Overview
             </h2>
@@ -192,19 +197,19 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg card-hover text-center">
+            <div className="bg-card border border-border dark:bg-card p-8 rounded-xl shadow-lg card-hover text-center">
               <div className="text-4xl font-bold text-teal mb-2">5M+</div>
               <div className="text-lg font-semibold text-charcoal dark:text-white mb-2">Records Analyzed</div>
               <div className="text-gray-600 dark:text-gray-300">In bike share analysis project</div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg card-hover text-center">
+            <div className="bg-card border border-border dark:bg-card p-8 rounded-xl shadow-lg card-hover text-center">
               <div className="text-4xl font-bold text-teal mb-2">1.2L</div>
               <div className="text-lg font-semibold text-charcoal dark:text-white mb-2">Person-Days Delivered</div>
               <div className="text-gray-600 dark:text-gray-300">Through MGNREGA program management</div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg card-hover text-center">
+            <div className="bg-card border border-border dark:bg-card p-8 rounded-xl shadow-lg card-hover text-center">
               <div className="text-4xl font-bold text-teal mb-2">500+</div>
               <div className="text-lg font-semibold text-charcoal dark:text-white mb-2">Artisans Surveyed</div>
               <div className="text-gray-600 dark:text-gray-300">For policy decision analytics</div>
