@@ -4,7 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: '/your-repo/', // replace with your repo name
+  base: '/ajay-shankar-portfolio-site/',
   server: {
     host: "::",
     port: 8080,
