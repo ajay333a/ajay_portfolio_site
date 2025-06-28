@@ -4,7 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: '/ajay-portfolio-site/',
+  base: '/ajay_portfolio_site/', // Corrected base to match GitHub repo name
   server: {
     host: "::",
     port: 8080,
