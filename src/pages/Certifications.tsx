@@ -42,7 +42,7 @@ const Certifications = () => {
       link: "https://www.hackerrank.com/certificates/838f70322a1d",
       icon: "📄",
       skills: ["Complex Queries", "Window Functions", "Subqueries", "Query Optimization"],
-      image: "ajay_portfolio_site/sql_intermediate_certificate.png"
+      image: "/ajay_portfolio_site/sql_intermediate_certificate.png"
     },
     {
       title:"OdinSchool Data Science Bootcamp",
