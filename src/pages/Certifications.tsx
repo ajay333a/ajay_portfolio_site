@@ -8,6 +8,7 @@ interface Certification {
   link: string;
   icon: string;
   skills: string[];
+  image?: string;
 }
 
 const Certifications = () => {
@@ -22,7 +23,8 @@ const Certifications = () => {
       description: "Comprehensive program covering data analysis fundamentals, data cleaning, visualization, and R programming for analytics.",
       link: "https://coursera.org/verify/professional-cert/S8VZ79DVEXP7",
       icon: "📃",
-      skills: ["Data Analysis", "R Programming", "Data Visualization", "SQL", "Tableau"]
+      skills: ["Data Analysis", "R Programming", "Data Visualization", "SQL", "Tableau"],
+      image: "https://ajay333a.quarto.pub/ajay-shankar-a/certificates/coursera_cert.png"
     },
     {
       title: "SQL (Basic) Certificate",
@@ -30,7 +32,8 @@ const Certifications = () => {
       description: "Demonstrates proficiency in basic SQL operations, queries, and database management fundamentals.",
       link: "https://www.hackerrank.com/certificates/b177fc5d7a63",
       icon: "🪪",
-      skills: ["SQL Queries", "Database Design", "Data Retrieval", "Basic Joins"]
+      skills: ["SQL Queries", "Database Design", "Data Retrieval", "Basic Joins"],
+      image: "/ajay_portfolio_site/sql_basic certificate.png"
     },
     {
       title: "SQL (Intermediate) Certificate",
@@ -38,7 +41,8 @@ const Certifications = () => {
       description: "Advanced SQL skills including complex joins, subqueries, window functions, and performance optimization.",
       link: "https://www.hackerrank.com/certificates/838f70322a1d",
       icon: "📄",
-      skills: ["Complex Queries", "Window Functions", "Subqueries", "Query Optimization"]
+      skills: ["Complex Queries", "Window Functions", "Subqueries", "Query Optimization"],
+      image: "ajay_portfolio_site/sql_intermediate_certificate.png"
     },
     {
       title:"OdinSchool Data Science Bootcamp",
@@ -46,7 +50,8 @@ const Certifications = () => {
       description: "Intensive bootcamp covering data science fundamentals, including Python, data manipulation, machine learning, and data visualization.",
       link: "https://go.odinschool.com/verify-certificate",
       icon: "🎓",
-      skills: ["Python", "Advanced SQL", "Power BI", "Statistics"]
+      skills: ["Python", "Advanced SQL", "Power BI", "Statistics"],
+      image: "/ajay_portfolio_site/odin_cert.png"
     }
   ];
 
@@ -65,17 +70,23 @@ const Certifications = () => {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="grid gap-8">
             {certifications.map((cert, index) => (
               <div
                 key={index}
-                className="bg-card border border-border rounded-xl shadow-lg p-8 card-hover animate-fade-up"
+                className="bg-card border border-border rounded-xl shadow-lg p-8 card-hover animate-fade-up w-full"
                 style={{animationDelay: `${index * 0.1}s`}}
               >
-                <div className="flex items-start gap-6">
-                  <div className="text-6xl">{cert.icon}</div>
-                  
+                <div className="flex items-start gap-12">
+                  {cert.image && (
+                    <img
+                      src={cert.image}
+                      alt={cert.title + ' certificate'}
+                      className="w-64 h-64 object-contain rounded-lg border border-border shadow-md"
+                      loading="lazy"
+                    />
+                  )}
                   <div className="flex-1">
                     <div className="flex items-start justify-between mb-4">
                       <div>

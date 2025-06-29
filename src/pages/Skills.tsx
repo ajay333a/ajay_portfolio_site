@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Code, Database, BarChart3, Wrench } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Skill {
   name: string;
@@ -77,29 +78,48 @@ const Skills = () => {
               className="animate-fade-up"
               style={{animationDelay: `${categoryIndex * 0.1}s`}}
             >
-              <div className="bg-card border border-border rounded-xl shadow-lg p-8 h-full">
-                <div className="flex items-center gap-3 mb-6">
-                  {category.icon}
-                  <h2 className="text-2xl font-inter font-semibold text-charcoal border-b-2 border-primary pb-1">
-                    {category.title}
-                  </h2>
+              <div className="bg-card border border-border rounded-xl shadow-lg p-0 h-full flex flex-row items-stretch gap-0 overflow-hidden">
+                <div className="w-1/3 min-w-[120px] h-full">
+                  <img
+                    src={
+                      category.title === "Programming Languages"
+                        ? "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&w=800&q=80" // code/keyboard
+                        : category.title === "Data Analysis & Libraries"
+                        ? "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&w=800&q=80" // data analysis
+                        : category.title === "Visualization Tools"
+                        ? "https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&w=800&q=80" // charts/graphs
+                        : category.title === "Additional Tools"
+                        ? "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&w=800&q=80" // teamwork/tools
+                        : "https://images.pexels.com/photos/207983/pexels-photo-207983.jpeg?auto=compress&w=800&q=80" // fallback
+                    }
+                    alt={category.title + ' stock'}
+                    className="w-full h-full object-cover rounded-l-xl"
+                    loading="lazy"
+                  />
                 </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  {category.skills.map((skill, skillIndex) => (
-                    <div key={skill.name} className="">
-                      <div className="">
-                        <div className="text-left">
-                          <span className="block font-medium text-card-foreground text-base mb-1">
-                            {skill.name}
-                          </span>
-                          <span className="block text-muted-foreground text-sm leading-snug">
-                            {skill.description}
-                          </span>
+                <div className="flex-1 flex flex-col justify-center p-8">
+                  <div className="flex items-center gap-3 mb-6">
+                    {category.icon}
+                    <h2 className="text-2xl font-inter font-semibold text-charcoal border-b-2 border-primary pb-1">
+                      {category.title}
+                    </h2>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    {category.skills.map((skill, skillIndex) => (
+                      <div key={skill.name} className="">
+                        <div className="">
+                          <div className="text-left">
+                            <span className="block font-medium text-card-foreground text-base mb-1">
+                              {skill.name}
+                            </span>
+                            <span className="block text-muted-foreground text-sm leading-snug">
+                              {skill.description}
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -115,9 +135,9 @@ const Skills = () => {
             <p className="text-foreground mb-6">
               Explore my projects to see how I've applied these tools to solve real-world problems
             </p>
-            <a href="/projects" className="btn-primary">
+            <Link to="/projects" className="btn-primary" aria-label="View my projects page">
               View My Projects
-            </a>
+            </Link>
           </div>
         </div>
       </section>

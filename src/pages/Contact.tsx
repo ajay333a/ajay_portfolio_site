@@ -85,7 +85,7 @@ const Contact = () => {
       icon: <Download size={20} />,
       label: "Resume",
       value: "Download PDF",
-      href: "https://drive.google.com/file/d/1K6RYvsS-0TAjO92ELMndgQN7yo9mE8sb/view?usp=sharing"
+      href: "https://drive.google.com/file/d/1O35DyRH6l5BRobDWxh-J2GMq8cc1DRLo/view?usp=sharing"
     }
   ];
 
