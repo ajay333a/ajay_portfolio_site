@@ -21,7 +21,7 @@ const Index = () => {
               Data Analyst passionate about insights, impact & storytelling
             </p>
             <p className="text-lg text-gray-500 mb-12 max-w-lg">
-              Google Certified Data analyst with 3 years of experience in analytics,
+              Google Certified Data analyst with experience in analytics,
                passionate about data analytics with a master’s degree in Forest Biology and Tree Improvement.
                 Seeking opportunities where I can utilize my analytical and technical skills to solve real life data analytics problems.
             </p>
@@ -35,7 +35,7 @@ const Index = () => {
                 <ArrowRight size={20} />
               </Link>
               <a
-                href="https://drive.google.com/file/d/1O35DyRH6l5BRobDWxh-J2GMq8cc1DRLo/view?usp=sharing" // Updated to actual resume link
+                href="https://drive.google.com/file/d/17Dyklp2DNeZfwgg4q-8MOVUevrQRXp9B/view?usp=sharing" // Updated to actual resume link
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary inline-flex items-center gap-2"

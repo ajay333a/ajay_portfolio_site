@@ -12,27 +12,13 @@ interface ExperienceItem {
 }
 
 const experienceData: ExperienceItem[] = [
-  {
-    title: "Technical Assistant",
-    company: "Zilla Panchayath Ballari",
-    location: "Ballari, Karnataka",
-    duration: "Nov 2022 – Present",
-    description: "Leading MGNREGA program implementation with data-driven decision making. Delivered 1.2 lakh person-days through efficient resource allocation and automated reporting systems.",
-    toolsUsed: ["Excel", "SQL", "Data Analysis", "Report Automation", "Process Optimization"],
-    impactMetrics: [
-      "Delivered 1.2 lakh person-days through MGNREGA",
-      "Automated reporting reduced processing time by 60%",
-      "Improved resource allocation efficiency by 40%",
-      "Streamlined administrative processes for 50+ villages"
-    ]
-  },
-  {
+ {
     title: "Research Associate",
     company: "Environmental Management & Policy Research Institute (EMPRI)",
     location: "Bangalore, Karnataka",
     duration: "May 2022 – Aug 2022",
     description: "Conducted comprehensive survey and analysis of 500 artisans across Karnataka. Developed data-driven insights that influenced state-level policy decisions for artisan welfare programs.",
-    toolsUsed: ["R", "Statistical Analysis", "Survey Design", "Data Visualization", "Policy Research"],
+    toolsUsed: ["Google Forms", "Excel", "Statistical Analysis", "Survey Design", "Data Visualization", "Policy Research"],
     impactMetrics: [
       "Surveyed 500+ artisans across multiple districts",
       "Generated insights that influenced policy decisions",

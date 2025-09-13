@@ -66,8 +66,8 @@ const Contact = () => {
     {
       icon: <Mail size={20} />,
       label: "Email",
-      value: "navaajayshankar333a@gmail.com",
-      href: "mailto:navaajayshankar333a@gmail.com"
+      value: "ajayshankar333a@gmail.com",
+      href: "mailto:ajayshankar333a@gmail.com"
     },
     {
       icon: <Linkedin size={20} />,
@@ -85,7 +85,7 @@ const Contact = () => {
       icon: <Download size={20} />,
       label: "Resume",
       value: "Download PDF",
-      href: "https://drive.google.com/file/d/1O35DyRH6l5BRobDWxh-J2GMq8cc1DRLo/view?usp=sharing"
+      href: "https://drive.google.com/file/d/17Dyklp2DNeZfwgg4q-8MOVUevrQRXp9B/view?usp=sharing"
     }
   ];
 

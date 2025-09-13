@@ -21,7 +21,7 @@ const Certifications = () => {
       title: "Google Data Analytics Professional Certificate",
       issuer: "Google via Coursera",
       description: "Comprehensive program covering data analysis fundamentals, data cleaning, visualization, and R programming for analytics.",
-      link: "https://coursera.org/verify/professional-cert/S8VZ79DVEXP7",
+      link: "https://www.coursera.org/account/accomplishments/specialization/EQGTF6EM2QPN",
       icon: "📃",
       skills: ["Data Analysis", "R Programming", "Data Visualization", "SQL", "Tableau"],
       image: "https://ajay333a.quarto.pub/ajay-shankar-a/certificates/coursera_cert.png"

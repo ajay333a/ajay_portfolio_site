@@ -32,8 +32,7 @@ const Projects = () => {
       highlights: [
         "Processed 5+ million bike trip records",
         "Identified seasonal usage patterns",
-        "Created actionable recommendations for service optimization",
-        "Developed interactive visualizations for stakeholder presentations"
+        "Created actionable recommendations for service optimization"
       ]
     },
     {
@@ -41,15 +40,13 @@ const Projects = () => {
       description: "Database analysis project demonstrating advanced SQL techniques including complex joins, subqueries, and window functions to extract business insights from music store data.",
       dataSize: "Complex Queries",
       tools: ["MySQL", "Joins", "Subqueries", "Window Functions"],
-      link: "https://github.com/ajay333a/cs_50_ajay/tree/main/wk_7_SQL",
-      githubLink: "https://github.com/ajay333a/cs_50_ajay/tree/main/wk_7_SQL",
+      link: "https://drive.google.com/drive/folders/1aXDYxoE3NSQJ8VR7zSir8X5Wyan49EAv?usp=drive_link",
       image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500",
       category: "Database Analysis",
       highlights: [
         "Advanced SQL query optimization",
         "Complex data relationships analysis",
-        "Business intelligence reporting",
-        "Performance tuning and indexing strategies"
+        "Business intelligence reporting"
       ]
     }
   ];

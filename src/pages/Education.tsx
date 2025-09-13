@@ -14,31 +14,26 @@ interface EducationItem {
 const educationData: EducationItem[] = [
   {
     degree: "MSc in Forest Biology and Tree Improvement",
-    institution: "University of Agricultural Sciences, Bangalore",
+    institution: "University of Agricultural Sciences, Dharwad",
     duration: "Sept 2019 – Jan 2023",
     cgpa: "8.61",
     highlights: [
-      "Research in ecological data modeling",
       "Tree improvement analytics",
-      "Advanced statistical analysis",
-      "Climate data interpretation"
+      "Advanced statistical analysis"
     ],
-    thesis: "Genetic diversity analysis of forest species using molecular markers",
-    tools: ["R", "SPSS", "Excel", "GIS", "Statistical Modeling"]
+    thesis: "Clonal propagation of angiosperms through Leaves",
+    tools: ["R", "Excel", "Statistical Modeling"]
   },
   {
     degree: "BSc in Forestry",
-    institution: "University of Agricultural Sciences, Bangalore",
+    institution: "University of Agricultural Sciences, Dharwad",
     duration: "Aug 2015 – Apr 2019",
     cgpa: "8.14",
     highlights: [
-      "GIS and remote sensing",
-      "Climate data analysis",
-      "Natural resource analysis",
       "Forest inventory management"
     ],
-    thesis: "Forest cover change detection using satellite imagery",
-    tools: ["ArcGIS", "ERDAS Imagine", "Excel", "SQL", "R Programming"]
+    thesis: "Best pre-sowing treatments for 'Cordia myxa' and 'Xymenia americana' ",
+    tools: ["Excel", "Data Visualisation"]
   }
 ];
 
