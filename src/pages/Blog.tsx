@@ -1,179 +1,180 @@
 import { useState, useEffect } from "react";
-import { ExternalLink, Clock, Tag } from "lucide-react";
-
-interface BlogPost {
-  title: string;
-  category: "Python" | "R";
-  summary: string;
-  readTime: string;
-  tags: string[];
-  link: string;
-  image: string;
-}
+import {
+  ExternalLink,
+  BookOpen,
+  Clock,
+  Tag,
+  Sparkles,
+  ArrowRight,
+  Code2
+} from "lucide-react";
+import { blogPostsData, personalInfo } from "@/data/portfolioData";
 
 const Blog = () => {
+  const [activeFilter, setActiveFilter] = useState<"All" | "Python" | "R">("All");
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const [activeFilter, setActiveFilter] = useState<"All" | "Python" | "R">("All");
-
-  const blogPosts: BlogPost[] = [
-    {
-      title: "Medicines Side-effects Analysis with R",
-      category: "R",
-      summary: "Deep dive into medicines use analysis using R, exploring user patterns and seasonal trends with ggplot2 and dplyr.",
-      readTime: "15 min read",
-      tags: ["R", "Data Analysis", "ggplot2", "dplyr"],
-      link: "https://ajay333a.quarto.pub/ajay333a/posts/meds_analysis/Medicines_usage_sideeffects.html",
-      image: "https://images.pexels.com/photos/593451/pexels-photo-593451.jpeg?auto=compress&w=500" // Pexels, healthcare/pills, accessible in India
-    },
-    {
-      title: "Cyclist Trip Analysis with Python",
-      category: "Python",
-      summary: "Analysis of cyclist trip data using Python, focusing on trip patterns, duration analysis, and visualization with pandas.",
-      readTime: "12 min read",
-      tags: ["Python", "Pandas", "Data Science", "Visualization"],
-      link: "https://ajay333a.quarto.pub/python_blog/posts/cyclist_trip_analysis/cyc_trip_analysis.html",
-      image: "https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg?auto=compress&w=500" // Pexels, clear image of cyclists on bikes
-    }
-  ];
-
-  const filteredPosts = activeFilter === "All" 
-    ? blogPosts 
-    : blogPosts.filter(post => post.category === activeFilter);
+  const filteredPosts =
+    activeFilter === "All"
+      ? blogPostsData
+      : blogPostsData.filter((post) => post.category === activeFilter);
 
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen glow-mesh pt-6 pb-20">
       <section className="section-container">
-        <div className="text-center mb-16 animate-fade-up">
-          <h1 className="text-4xl lg:text-5xl font-inter font-bold text-card-foreground mb-6">
-            Blog & Tutorials
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-up">
+          <div className="badge-glow mb-3">
+            <BookOpen size={14} />
+            <span>Technical Projects & Publications</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+            Projects & Case Study Hub
           </h1>
-          <p className="text-xl text-foreground max-w-3xl mx-auto">
-            Sharing insights, tutorials, and learnings from my data analytics journey
+          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+            Detailed project walkthroughs, reproducible code notebooks, and statistical investigations published across dedicated R and Python Quarto hubs.
           </p>
         </div>
 
-        {/* Filter Tabs */}
+        {/* Filter Pills */}
         <div className="flex justify-center mb-12 animate-fade-up">
-          <div className="bg-muted p-1 rounded-lg">
-            {["All", "Python", "R"].map((filter) => (
+          <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-card/70 border border-border/80 backdrop-blur-md shadow-sm">
+            {(["All", "R", "Python"] as const).map((filter) => (
               <button
                 key={filter}
-                onClick={() => setActiveFilter(filter as "All" | "Python" | "R")}
-                className={`px-6 py-2 rounded-md font-medium transition-all duration-200 ${
+                onClick={() => setActiveFilter(filter)}
+                className={`px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
                   activeFilter === filter
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-card-foreground"
+                    ? "bg-primary text-primary-foreground shadow-md shadow-rose-500/20"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
                 }`}
               >
-                {filter} Blog{filter !== "All" ? "s" : ""}
+                {filter} {filter !== "All" && "Projects"}
               </button>
             ))}
           </div>
         </div>
 
         {/* Blog Posts Grid */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {filteredPosts.map((post, index) => (
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
+          {filteredPosts.map((post, idx) => (
             <article
-              key={index}
-              className="bg-card border border-border rounded-xl shadow-lg overflow-hidden card-hover animate-fade-up"
-              style={{animationDelay: `${index * 0.1}s`}}
+              key={post.id}
+              className="glass-panel overflow-hidden flex flex-col group hover:border-primary/50 hover:shadow-2xl transition-all duration-300 animate-fade-up"
+              style={{ animationDelay: `${idx * 0.1}s` }}
             >
-              <div className="relative h-48 overflow-hidden">
+              {/* Cover Image */}
+              <div className="relative h-48 sm:h-56 overflow-hidden bg-muted">
                 <img
                   src={post.image}
                   alt={post.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
                 />
                 <div className="absolute top-4 left-4">
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium text-white ${
-                    post.category === "Python" ? "bg-blue-500" : "bg-purple-500"
-                  }`}>
-                    {post.category} Blog
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm ${
+                      post.category === "Python"
+                        ? "bg-blue-600/90 backdrop-blur-md"
+                        : "bg-purple-600/90 backdrop-blur-md"
+                    }`}
+                  >
+                    {post.category} Case Study
                   </span>
                 </div>
               </div>
 
-              <div className="p-6">
-                <h3 className="text-xl font-inter font-semibold text-card-foreground mb-3">
-                  {post.title}
-                </h3>
+              {/* Content */}
+              <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {post.title}
+                  </h3>
 
-                <p className="text-foreground mb-4 leading-relaxed">
-                  {post.summary}
-                </p>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                    {post.summary}
+                  </p>
 
-                <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <Clock size={16} />
-                    <span>{post.readTime}</span>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {post.tags.map((tag, idx) => (
-                    <span
-                      key={idx}
-                      className="flex items-center gap-1 bg-muted text-muted-foreground px-3 py-1 rounded-full text-sm"
-                    >
-                      <Tag size={12} />
-                      {tag}
+                  <div className="flex items-center gap-4 text-xs text-muted-foreground mb-5">
+                    <span className="flex items-center gap-1">
+                      <Clock size={13} className="text-primary" />
+                      <span>{post.readTime}</span>
                     </span>
-                  ))}
+                  </div>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    {post.tags.map((tag, tIdx) => (
+                      <span key={tIdx} className="badge-tag">
+                        <Tag size={10} className="text-primary mr-1" />
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
                 <a
                   href={post.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary inline-flex items-center gap-2 w-full justify-center"
+                  className="btn-primary w-full justify-center"
                 >
-                  Read More
-                  <ExternalLink size={16} />
+                  <span>Read on Quarto</span>
+                  <ExternalLink size={14} />
                 </a>
               </div>
             </article>
           ))}
         </div>
 
-        {/* Blog Links Section */}
-        <div className="mt-16 grid md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-fade-up">
-          <div className="bg-card border border-border rounded-xl p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-inter font-semibold text-card-foreground mb-4">
-              R Programming Blog
-            </h3>
-            <p className="text-foreground mb-6">
-              Explore my R programming journey with practical tutorials and real-world data analysis projects.
-            </p>
+        {/* Quarto Publication Hubs */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto animate-fade-up">
+          <div className="glass-panel p-8 flex flex-col justify-between group hover:border-purple-500/40 transition-all duration-300">
+            <div>
+              <span className="px-2.5 py-1 rounded-md text-xs font-bold bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20 mb-3 inline-block">
+                Quarto Portal
+              </span>
+              <h3 className="text-xl font-bold text-foreground mb-2">
+                R Programming & Biostatistics Blog
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                Explore in-depth R tutorials covering data transformation with dplyr, advanced visualizations with ggplot2, and ecological modeling.
+              </p>
+            </div>
             <a
-              href="https://ajay333a.quarto.pub/ajay333a/"
+              href={personalInfo.rBlogUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary inline-flex items-center gap-2"
+              className="btn-secondary"
             >
-              Visit R Blog
-              <ExternalLink size={16} />
+              <span>Visit R Quarto Hub</span>
+              <ExternalLink size={14} />
             </a>
           </div>
 
-          <div className="bg-card border border-border rounded-xl p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-inter font-semibold text-card-foreground mb-4">
-              Python Data Science Blog
-            </h3>
-            <p className="text-foreground mb-6">
-              Discover Python data science techniques, pandas operations, and advanced analytics methodologies.
-            </p>
+          <div className="glass-panel p-8 flex flex-col justify-between group hover:border-blue-500/40 transition-all duration-300">
+            <div>
+              <span className="px-2.5 py-1 rounded-md text-xs font-bold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 mb-3 inline-block">
+                Quarto Portal
+              </span>
+              <h3 className="text-xl font-bold text-foreground mb-2">
+                Python Data Science Blog
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                Read Python analyses covering pandas pipelines, exploratory data analysis, geospatial mapping, and automated statistical reporting.
+              </p>
+            </div>
             <a
-              href="https://ajay333a.quarto.pub/python_blog/"
+              href={personalInfo.pythonBlogUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary inline-flex items-center gap-2"
+              className="btn-secondary"
             >
-              Visit Python Blog
-              <ExternalLink size={16} />
+              <span>Visit Python Quarto Hub</span>
+              <ExternalLink size={14} />
             </a>
           </div>
         </div>

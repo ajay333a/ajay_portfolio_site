@@ -1,238 +1,318 @@
 import { useState, useEffect } from "react";
-import { ExternalLink, Github, Database, BarChart3, X } from "lucide-react";
-
-interface Project {
-  title: string;
-  description: string;
-  dataSize: string;
-  tools: string[];
-  link: string;
-  githubLink?: string;
-  image: string;
-  category: string;
-  highlights: string[];
-}
+import {
+  ExternalLink,
+  Github,
+  Database,
+  Search,
+  CheckCircle2,
+  X,
+  Layers,
+  Sparkles,
+  ArrowUpRight
+} from "lucide-react";
+import { projectsData, Project } from "@/data/portfolioData";
 
 const Projects = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const categories = ["All", "Machine Learning", "Python", "R", "SQL", "Excel"];
 
-  const projects: Project[] = [
-    {
-      title: "Cyclist Bike Share Analysis",
-      description: "Comprehensive analysis of bike share data to understand user patterns and optimize service delivery. Analyzed 5M+ records using R programming with focus on seasonal trends and user behavior.",
-      dataSize: "5M+ Records",
-      tools: ["R", "dplyr", "ggplot2", "Statistical Analysis"],
-      link: "https://ajay333a.quarto.pub/ajay333a/posts/cyclist_trip_analysis/cyclist_bike_202207_202306.html",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500",
-      category: "Data Analysis",
-      highlights: [
-        "Processed 5+ million bike trip records",
-        "Identified seasonal usage patterns",
-        "Created actionable recommendations for service optimization"
-      ]
-    },
-    {
-      title: "SQL Amazon Store Analysis",
-      description: "Database analysis project demonstrating advanced SQL techniques including complex joins, subqueries, and window functions to extract business insights from music store data.",
-      dataSize: "Complex Queries",
-      tools: ["MySQL", "Joins", "Subqueries", "Window Functions"],
-      link: "https://drive.google.com/drive/folders/1aXDYxoE3NSQJ8VR7zSir8X5Wyan49EAv?usp=drive_link",
-      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500",
-      category: "Database Analysis",
-      highlights: [
-        "Advanced SQL query optimization",
-        "Complex data relationships analysis",
-        "Business intelligence reporting"
-      ]
-    }
-  ];
-
-  const openModal = (project: Project) => {
-    setSelectedProject(project);
-  };
-
-  const closeModal = () => {
-    setSelectedProject(null);
-  };
+  const filteredProjects = projectsData.filter((project) => {
+    const matchesCategory =
+      selectedCategory === "All" ||
+      project.category === selectedCategory ||
+      Boolean(project.categories && project.categories.includes(selectedCategory as any));
+    const matchesSearch =
+      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.tools.some((t) =>
+        t.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    return matchesCategory && matchesSearch;
+  });
 
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen glow-mesh pt-6 pb-20">
       <section className="section-container">
-        <div className="text-center mb-16 animate-fade-up">
-          <h1 className="text-4xl lg:text-5xl font-inter font-bold text-card-foreground mb-6">
-            Projects Portfolio
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-up">
+          <div className="badge-glow mb-3">
+            <Layers size={14} />
+            <span>Applied Analytics Portfolio</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+            Data Projects & Case Studies
           </h1>
-          <p className="text-xl text-foreground max-w-3xl mx-auto mb-4">
-            Practical, real-world analytics using real-world data
-          </p>
-          <p className="text-lg text-muted-foreground">
-            Click on any project to see detailed insights and methodologies
+          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+            Practical analytics implementations examining multi-million record datasets, relational database queries, and statistical modeling in R and Python.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="bg-card border border-border rounded-xl shadow-lg overflow-hidden card-hover cursor-pointer animate-fade-up"
-              style={{animationDelay: `${index * 0.1}s`}}
-              onClick={() => openModal(project)}
+        {/* Filter & Search Bar */}
+        <div className="max-w-4xl mx-auto mb-10 space-y-4 animate-fade-up">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Category Pills */}
+            <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-2xl bg-card/70 border border-border/80 backdrop-blur-md shadow-sm w-full sm:w-auto justify-center">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 ${
+                    selectedCategory === category
+                      ? "bg-primary text-primary-foreground shadow-md shadow-rose-500/25"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                  }`}
+                >
+                  {category} {category !== "All" && "Projects"}
+                </button>
+              ))}
+            </div>
+
+            {/* Search Input */}
+            <div className="relative w-full sm:w-72">
+              <Search
+                size={16}
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground"
+              />
+              <input
+                type="text"
+                placeholder="Search tools, topics..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 text-sm rounded-xl bg-card/70 border border-border/80 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Projects Grid */}
+        {filteredProjects.length === 0 ? (
+          <div className="glass-panel p-12 text-center max-w-md mx-auto">
+            <p className="text-muted-foreground font-medium mb-3">
+              No projects found matching your query.
+            </p>
+            <button
+              onClick={() => {
+                setSelectedCategory("All");
+                setSearchQuery("");
+              }}
+              className="btn-secondary !py-1.5 !px-4 text-xs"
             >
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
-                    {project.category}
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-inter font-semibold text-card-foreground mb-3">
-                  {project.title}
-                </h3>
-                <p className="text-foreground mb-4 line-clamp-3">
-                  {project.description}
-                </p>
-
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="flex items-center gap-1">
-                    <Database size={16} className="text-teal" />
-                    <span className="text-sm font-medium text-card-foreground">{project.dataSize}</span>
+              Reset Filters
+            </button>
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {filteredProjects.map((project, idx) => (
+              <div
+                key={project.id}
+                className="glass-panel overflow-hidden flex flex-col group hover:border-primary/50 hover:shadow-2xl transition-all duration-300 animate-fade-up cursor-pointer"
+                style={{ animationDelay: `${idx * 0.1}s` }}
+                onClick={() => setSelectedProject(project)}
+              >
+                {/* Project Media */}
+                <div className="relative h-52 sm:h-60 overflow-hidden bg-muted">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-background/90 text-foreground backdrop-blur-md border border-border shadow-sm">
+                      {project.categories ? project.categories.join(" & ") : project.category}
+                    </span>
+                  </div>
+                  <div className="absolute top-4 right-4">
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-rose-600/90 text-white backdrop-blur-md shadow-sm">
+                      {project.dataSize}
+                    </span>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tools.slice(0, 3).map((tool, idx) => (
-                    <span
-                      key={idx}
-                      className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-medium"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                  {project.tools.length > 3 && (
-                    <span className="bg-muted text-muted-foreground px-3 py-1 rounded-full text-sm font-medium">
-                      +{project.tools.length - 3} more
-                    </span>
-                  )}
-                </div>
+                {/* Project Body */}
+                <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs font-semibold text-rose-600 dark:text-rose-400 mb-3">
+                      {project.subtitle}
+                    </p>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">
+                      {project.description}
+                    </p>
 
-                <div className="flex gap-3">
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <ExternalLink size={16} />
-                    View Project
-                  </a>
-                  {project.githubLink && (
-                    <a
-                      href={project.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-muted-foreground hover:text-card-foreground font-medium"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <Github size={16} />
-                      Code
-                    </a>
-                  )}
+                    {/* Highlights Preview */}
+                    <div className="space-y-1.5 mb-5 text-xs text-foreground/85">
+                      {project.highlights.slice(0, 2).map((highlight, hIdx) => (
+                        <div key={hIdx} className="flex items-start gap-2">
+                          <CheckCircle2
+                            size={14}
+                            className="text-rose-500 flex-shrink-0 mt-0.5"
+                          />
+                          <span className="line-clamp-1">{highlight}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    {/* Tech Badges */}
+                    <div className="flex flex-wrap gap-1.5 mb-5">
+                      {project.tools.map((tool, tIdx) => (
+                        <span key={tIdx} className="badge-tag">
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Action Links */}
+                    <div className="flex items-center justify-between pt-4 border-t border-border/60">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedProject(project);
+                        }}
+                        className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
+                      >
+                        <span>View Details</span>
+                        <ArrowUpRight size={14} />
+                      </button>
+
+                      <div className="flex items-center gap-3">
+                        {project.githubLink && (
+                          <a
+                            href={project.githubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs text-muted-foreground hover:text-foreground font-medium flex items-center gap-1"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <Github size={14} />
+                            <span>Code</span>
+                          </a>
+                        )}
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-primary !py-1.5 !px-3 !text-xs !rounded-lg"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <span>Live Report</span>
+                          <ExternalLink size={12} />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
-        {/* Project Modal */}
+        {/* Modal Case Study Deep Dive */}
         {selectedProject && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-card border border-border rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-              <div className="relative">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+            <div className="glass-panel max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-3xl border border-white/20 shadow-2xl relative">
+              {/* Header Image in Modal */}
+              <div className="relative h-64 overflow-hidden bg-muted">
                 <img
                   src={selectedProject.image}
                   alt={selectedProject.title}
-                  className="w-full h-64 object-cover"
+                  className="w-full h-full object-cover"
                 />
                 <button
-                  onClick={closeModal}
-                  className="absolute top-4 right-4 bg-card rounded-full p-2 shadow-lg hover:bg-accent"
+                  onClick={() => setSelectedProject(null)}
+                  className="absolute top-4 right-4 p-2 rounded-full bg-background/80 text-foreground backdrop-blur-md border border-border shadow-md hover:bg-background transition-colors"
+                  aria-label="Close modal"
                 >
-                  <X size={20} />
+                  <X size={18} />
                 </button>
-              </div>
-
-              <div className="p-8">
-                <div className="mb-4">
-                  <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
+                <div className="absolute bottom-4 left-4 flex gap-2">
+                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-background/90 text-foreground backdrop-blur-md border border-border">
                     {selectedProject.category}
                   </span>
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-rose-600/90 text-white backdrop-blur-md">
+                    {selectedProject.dataSize}
+                  </span>
+                </div>
+              </div>
+
+              {/* Modal Body */}
+              <div className="p-6 sm:p-8 space-y-6">
+                <div>
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground mb-1">
+                    {selectedProject.title}
+                  </h2>
+                  <p className="text-sm font-semibold text-rose-600 dark:text-rose-400">
+                    {selectedProject.subtitle}
+                  </p>
                 </div>
 
-                <h2 className="text-2xl font-inter font-bold text-card-foreground mb-4">
-                  {selectedProject.title}
-                </h2>
-
-                <p className="text-foreground mb-6 leading-relaxed">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
                   {selectedProject.description}
                 </p>
 
-                <div className="mb-6">
-                  <h3 className="font-semibold text-card-foreground mb-3">Key Highlights:</h3>
-                  <ul className="space-y-2">
-                    {selectedProject.highlights.map((highlight, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-foreground">{highlight}</span>
+                {/* Key Highlights */}
+                <div>
+                  <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-3">
+                    Key Methodology & Impact
+                  </h4>
+                  <ul className="space-y-2 text-sm text-foreground/90">
+                    {selectedProject.highlights.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5">
+                        <CheckCircle2
+                          size={16}
+                          className="text-rose-500 flex-shrink-0 mt-0.5"
+                        />
+                        <span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="mb-6">
-                  <h3 className="font-semibold text-card-foreground mb-3">Tools & Technologies:</h3>
+                {/* Tools & Technologies */}
+                <div>
+                  <h4 className="font-bold text-sm text-foreground uppercase tracking-wider mb-3">
+                    Technologies & Packages
+                  </h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.tools.map((tool, idx) => (
-                      <span
-                        key={idx}
-                        className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-medium"
-                      >
+                      <span key={idx} className="badge-tag">
                         {tool}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="flex gap-4">
+                {/* Modal Actions */}
+                <div className="pt-4 border-t border-border flex flex-wrap items-center gap-3">
                   <a
                     href={selectedProject.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-primary flex items-center gap-2"
+                    className="btn-primary flex-1 justify-center"
                   >
                     <ExternalLink size={16} />
-                    View Full Project
+                    <span>Open Case Study / Report</span>
                   </a>
                   {selectedProject.githubLink && (
                     <a
                       href={selectedProject.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-secondary flex items-center gap-2"
+                      className="btn-secondary"
                     >
                       <Github size={16} />
-                      View Code
+                      <span>Source Code</span>
                     </a>
                   )}
                 </div>

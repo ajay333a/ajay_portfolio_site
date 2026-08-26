@@ -1,152 +1,136 @@
-import { useState, useEffect } from "react";
-import { ChevronDown, ChevronUp, Briefcase, Calendar, MapPin } from "lucide-react";
-
-interface ExperienceItem {
-  title: string;
-  company: string;
-  location: string;
-  duration: string;
-  description: string;
-  toolsUsed: string[];
-  impactMetrics: string[];
-}
-
-const experienceData: ExperienceItem[] = [
- {
-    title: "Research Associate",
-    company: "Environmental Management & Policy Research Institute (EMPRI)",
-    location: "Bangalore, Karnataka",
-    duration: "May 2022 – Aug 2022",
-    description: "Conducted comprehensive survey and analysis of 500 artisans across Karnataka. Developed data-driven insights that influenced state-level policy decisions for artisan welfare programs.",
-    toolsUsed: ["Google Forms", "Excel", "Statistical Analysis", "Survey Design", "Data Visualization", "Policy Research"],
-    impactMetrics: [
-      "Surveyed 500+ artisans across multiple districts",
-      "Generated insights that influenced policy decisions",
-      "Created comprehensive analytical reports",
-      "Presented findings to state government officials"
-    ]
-  }
-];
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import {
+  Briefcase,
+  Calendar,
+  MapPin,
+  CheckCircle2,
+  Sparkles,
+  ArrowRight,
+  Building2
+} from "lucide-react";
+import { experienceData } from "@/data/portfolioData";
 
 const Experience = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Set all expanded by default and allow independent expansion
-  const [expandedItems, setExpandedItems] = useState<boolean[]>(() => experienceData.map(() => true));
-
-  const toggleExpansion = (index: number) => {
-    setExpandedItems(prev => {
-      const updated = [...prev];
-      updated[index] = !updated[index];
-      return updated;
-    });
-  };
-
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen glow-mesh pt-6 pb-20">
       <section className="section-container">
-        <div className="text-center mb-16 animate-fade-up">
-          <h1 className="text-4xl lg:text-5xl font-inter font-bold text-card-foreground mb-6">
-            Work Experience
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-up">
+          <div className="badge-glow mb-3">
+            <Briefcase size={14} />
+            <span>Professional Career</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+            Work Experience & Field Impact
           </h1>
-          <p className="text-xl text-foreground max-w-3xl mx-auto">
-            Practical experience in data analysis, program management, and policy research
+          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+            Practical background across institutional policy research, large-scale survey execution, government welfare operations, and analytics governance.
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-accent"></div>
+        {/* Timeline */}
+        <div className="max-w-4xl mx-auto relative mb-16">
+          {/* Vertical line */}
+          <div className="absolute left-4 sm:left-8 top-4 bottom-4 w-0.5 bg-gradient-to-b from-rose-500 via-red-500 to-transparent"></div>
 
-            {experienceData.map((item, index) => (
-              <div key={index} className="relative mb-12 animate-fade-up" style={{animationDelay: `${index * 0.2}s`}}>
-                {/* Timeline dot */}
-                <div className="absolute left-6 w-5 h-5 bg-primary rounded-full border-4 border-card shadow-lg"></div>
+          <div className="space-y-10 sm:space-y-12">
+            {experienceData.map((item, idx) => (
+              <div
+                key={item.id}
+                className="relative pl-12 sm:pl-20 animate-fade-up"
+                style={{ animationDelay: `${idx * 0.15}s` }}
+              >
+                {/* Timeline node icon */}
+                <div className="absolute left-2.5 sm:left-6.5 top-2 w-3.5 h-3.5 rounded-full bg-rose-500 ring-4 ring-card dark:ring-background shadow-md"></div>
 
-                <div className="ml-20">
-                  <div className="bg-card border border-border rounded-xl shadow-lg p-8 card-hover">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center gap-3">
-                        <Briefcase className="text-primary" size={24} />
-                        <div>
-                          <h3 className="text-xl font-inter font-semibold text-card-foreground">
-                            {item.title}
-                          </h3>
-                          <p className="text-foreground font-medium">{item.company}</p>
-                          <div className="flex items-center gap-1 text-foreground mt-1">
-                            <MapPin size={16} />
-                            <span className="text-sm font-medium">{item.location}</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="flex items-center gap-1 text-foreground">
-                          <Calendar size={16} />
-                          <span className="text-sm font-medium">{item.duration}</span>
-                        </div>
-                      </div>
+                <div className="glass-panel p-6 sm:p-8 hover:border-primary/50 transition-all duration-300">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-4">
+                    <div>
+                      <span className="badge-glow mb-2 text-[11px]">
+                        {item.type}
+                      </span>
+                      <h3 className="text-xl sm:text-2xl font-bold text-foreground">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm font-semibold text-primary flex items-center gap-1.5 mt-0.5">
+                        <Building2 size={15} />
+                        <span>{item.company}</span>
+                      </p>
                     </div>
 
-                    <p className="text-foreground mb-6 leading-relaxed">
-                      {item.description}
-                    </p>
+                    <div className="flex flex-wrap sm:flex-col sm:items-end gap-2 text-xs text-muted-foreground mt-1 sm:mt-0 font-medium">
+                      <span className="flex items-center gap-1">
+                        <Calendar size={13} className="text-primary" />
+                        <span>{item.duration}</span>
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <MapPin size={13} className="text-primary" />
+                        <span>{item.location}</span>
+                      </span>
+                    </div>
+                  </div>
 
-                    <button
-                      onClick={() => toggleExpansion(index)}
-                      className="flex items-center gap-2 text-primary font-medium hover:text-primary/80 transition-colors"
-                    >
-                      {expandedItems[index] ? (
-                        <>
-                          <ChevronUp size={20} />
-                          Hide Details
-                        </>
-                      ) : (
-                        <>
-                          <ChevronDown size={20} />
-                          Show Tools Used & Impact
-                        </>
-                      )}
-                    </button>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                    {item.description}
+                  </p>
 
-                    {expandedItems[index] && (
-                      <div className="mt-6 pt-6 border-t border-border animate-fade-in">
-                        <div className="grid md:grid-cols-2 gap-6">
-                          <div>
-                            <h4 className="font-semibold text-card-foreground mb-3">Tools Used:</h4>
-                            <div className="flex flex-wrap gap-2">
-                              {item.toolsUsed.map((tool, idx) => (
-                                <span
-                                  key={idx}
-                                  className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-medium"
-                                >
-                                  {tool}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-
-                          <div>
-                            <h4 className="font-semibold text-card-foreground mb-3">Impact Metrics:</h4>
-                            <ul className="space-y-2">
-                              {item.impactMetrics.map((metric, idx) => (
-                                <li key={idx} className="flex items-start gap-2">
-                                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                                  <span className="text-foreground text-sm">{metric}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                  {/* Impact Highlights */}
+                  <div className="mb-6 space-y-2">
+                    <h4 className="text-xs font-bold text-foreground uppercase tracking-wider mb-2">
+                      Key Outcomes & Responsibilities:
+                    </h4>
+                    <div className="space-y-2">
+                      {item.impactMetrics.map((metric, mIdx) => (
+                        <div
+                          key={mIdx}
+                          className="flex items-start gap-2.5 text-xs sm:text-sm text-foreground/90"
+                        >
+                          <CheckCircle2
+                            size={16}
+                            className="text-rose-500 flex-shrink-0 mt-0.5"
+                          />
+                          <span>{metric}</span>
                         </div>
-                      </div>
-                    )}
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Tools Used */}
+                  <div>
+                    <h4 className="text-xs font-bold text-foreground uppercase tracking-wider mb-2">
+                      Tools & Methodologies:
+                    </h4>
+                    <div className="flex flex-wrap gap-1.5">
+                      {item.toolsUsed.map((tool, tIdx) => (
+                        <span key={tIdx} className="badge-tag">
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+
+        {/* CTA */}
+        <div className="max-w-2xl mx-auto glass-panel p-8 text-center animate-fade-up">
+          <h3 className="text-xl font-bold text-foreground mb-2">
+            Interested in discussing potential roles or consulting?
+          </h3>
+          <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+            I am always open to exploring exciting opportunities in data analytics, research, and business intelligence.
+          </p>
+          <Link to="/contact" className="btn-primary">
+            <span>Get In Touch</span>
+            <ArrowRight size={16} />
+          </Link>
         </div>
       </section>
     </div>

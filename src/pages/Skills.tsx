@@ -1,122 +1,137 @@
-import { useState, useEffect } from "react";
-import { Code, Database, BarChart3, Wrench } from "lucide-react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-
-interface Skill {
-  name: string;
-  category: string;
-  icon?: string;
-  description: string;
-}
+import {
+  Code2,
+  Database,
+  BarChart3,
+  Wrench,
+  Sparkles,
+  ArrowRight,
+  PieChart,
+  CheckCircle2,
+  Cpu
+} from "lucide-react";
+import { skillCategories } from "@/data/portfolioData";
 
 const Skills = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
-
-  const skillCategories = [
-    {
-      title: "Programming Languages",
-      icon: <Code className="text-teal" size={24} />,
-      skills: [
-        { name: "Python", category: "Languages", description: "Data analysis, pandas, NumPy, scikit-learn" },
-        { name: "R", category: "Languages", description: "Statistical analysis, ggplot2, dplyr, tidyverse" },
-        { name: "SQL", category: "Languages", description: "Database queries, joins, data manipulation" },
-        { name: "Bash", category: "Languages", description: "Command line automation and scripting" }
-      ]
-    },
-    {
-      title: "Data Analysis & Libraries",
-      icon: <Database className="text-teal" size={24} />,
-      skills: [
-        { name: "Pandas", category: "Data", description: "Data manipulation and analysis in Python" },
-        { name: "NumPy", category: "Data", description: "Numerical computing and array operations" },
-        { name: "ggplot2", category: "Data", description: "Advanced data visualization in R" },
-        { name: "dplyr", category: "Data", description: "Data transformation and manipulation in R" }
-      ]
-    },
-    {
-      title: "Visualization Tools",
-      icon: <BarChart3 className="text-teal" size={24} />,
-      skills: [
-        { name: "Power BI", category: "Viz", description: "Interactive dashboards and business intelligence" },
-        { name: "Tableau", category: "Viz", description: "Advanced data visualization and storytelling" },
-        { name: "Excel", category: "Viz", description: "Pivot tables, advanced formulas, data analysis" },
-        { name: "Matplotlib", category: "Viz", description: "Python plotting and visualization library" }
-      ]
-    },
-    {
-      title: "Additional Tools",
-      icon: <Wrench className="text-teal" size={24} />,
-      skills: [
-        { name: "Machine Learning", category: "Extras", description: "Predictive and Classification models" },
-        { name: "Git", category: "Extras", description: "Version control and collaborative development" },
-        { name: "Storytelling", category: "Extras", description: "Data-driven narrative and presentation skills" },
-        { name: "Statistical Modeling", category: "Extras", description: "Hypothesis testing and predictive modeling" }
-      ]
+  const getCategoryIcon = (iconName: string) => {
+    switch (iconName) {
+      case "Cpu":
+        return <Cpu className="text-rose-500" size={24} />;
+      case "Code2":
+        return <Code2 className="text-red-500" size={24} />;
+      case "BarChart3":
+        return <BarChart3 className="text-orange-500" size={24} />;
+      case "PieChart":
+        return <PieChart className="text-pink-500" size={24} />;
+      case "Wrench":
+        return <Wrench className="text-amber-500" size={24} />;
+      default:
+        return <Database className="text-rose-500" size={24} />;
     }
-  ];
+  };
+
+  const getLevelBadgeClass = (level: string) => {
+    switch (level.toLowerCase()) {
+      case "expert":
+        return "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20";
+      case "advanced":
+        return "bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20";
+      default:
+        return "bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20";
+    }
+  };
 
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen glow-mesh pt-6 pb-20">
       <section className="section-container">
-        <div className="text-center mb-16 animate-fade-up">
-          <h1 className="text-4xl lg:text-5xl font-inter font-bold text-charcoal mb-6">
-            Skills & Tools
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-up">
+          <div className="badge-glow mb-3">
+            <Cpu size={14} />
+            <span>Technical & ML Capabilities</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+            Skills & Analytical Toolkit
           </h1>
-          <p className="text-xl font-inter max-w-3xl mx-auto">
-            A comprehensive toolkit for data analysis, visualization, and storytelling
+          <p className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+            A comprehensive overview of Machine Learning (Scikit-Learn, SciPy), programming languages, data wrangling libraries, business intelligence tools, and biostatistical modeling.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {skillCategories.map((category, categoryIndex) => (
+        {/* Categories Grid */}
+        <div className="space-y-12 max-w-5xl mx-auto mb-16">
+          {skillCategories.map((category, idx) => (
             <div
               key={category.title}
-              className="animate-fade-up"
-              style={{animationDelay: `${categoryIndex * 0.1}s`}}
+              className="glass-panel overflow-hidden animate-fade-up group hover:border-primary/40 transition-all duration-300"
+              style={{ animationDelay: `${idx * 0.1}s` }}
             >
-              <div className="bg-card border border-border rounded-xl shadow-lg p-0 h-full flex flex-row items-stretch gap-0 overflow-hidden">
-                <div className="w-1/3 min-w-[120px] h-full">
+              <div className="grid lg:grid-cols-12 gap-0">
+                {/* Visual Header Image Sidebar */}
+                <div className="lg:col-span-4 relative h-48 lg:h-auto min-h-[160px] overflow-hidden bg-muted">
                   <img
-                    src={
-                      category.title === "Programming Languages"
-                        ? "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&w=800&q=80" // code/keyboard
-                        : category.title === "Data Analysis & Libraries"
-                        ? "https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&w=800&q=80" // data analysis
-                        : category.title === "Visualization Tools"
-                        ? "https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&w=800&q=80" // charts/graphs
-                        : category.title === "Additional Tools"
-                        ? "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&w=800&q=80" // teamwork/tools
-                        : "https://images.pexels.com/photos/207983/pexels-photo-207983.jpeg?auto=compress&w=800&q=80" // fallback
-                    }
-                    alt={category.title + ' stock'}
-                    className="w-full h-full object-cover rounded-l-xl"
+                    src={category.image}
+                    alt={category.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
-                </div>
-                <div className="flex-1 flex flex-col justify-center p-8">
-                  <div className="flex items-center gap-3 mb-6">
-                    {category.icon}
-                    <h2 className="text-2xl font-inter font-semibold text-charcoal border-b-2 border-primary pb-1">
-                      {category.title}
-                    </h2>
+                  <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-card via-card/50 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4 lg:top-6 lg:left-6 flex items-center gap-3">
+                    <div className="p-2.5 rounded-xl bg-card/90 dark:bg-card/95 backdrop-blur-md shadow-md border border-border">
+                      {getCategoryIcon(category.iconName)}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-foreground">
+                        {category.title}
+                      </h3>
+                    </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    {category.skills.map((skill, skillIndex) => (
-                      <div key={skill.name} className="">
-                        <div className="">
-                          <div className="text-left">
-                            <span className="block font-medium text-card-foreground text-base mb-1">
-                              {skill.name}
-                            </span>
-                            <span className="block text-muted-foreground text-sm leading-snug">
-                              {skill.description}
-                            </span>
-                          </div>
+                </div>
+
+                {/* Skills Grid */}
+                <div className="lg:col-span-8 p-6 sm:p-8 flex flex-col justify-center">
+                  <p className="text-xs text-muted-foreground mb-6">
+                    {category.description}
+                  </p>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {category.skills.map((skill, sIdx) => (
+                      <div
+                        key={sIdx}
+                        className="p-4 rounded-xl bg-card/60 dark:bg-card/40 border border-border/70 hover:border-primary/40 transition-all duration-200"
+                      >
+                        <div className="flex items-center justify-between gap-2 mb-1.5">
+                          <h4 className="font-bold text-sm text-foreground">
+                            {skill.name}
+                          </h4>
+                          <span
+                            className={`px-2 py-0.5 rounded-md text-[10px] font-semibold border ${getLevelBadgeClass(
+                              skill.level
+                            )}`}
+                          >
+                            {skill.level}
+                          </span>
                         </div>
+                        <p className="text-xs text-muted-foreground leading-relaxed mb-2.5">
+                          {skill.description}
+                        </p>
+                        {skill.tags && (
+                          <div className="flex flex-wrap gap-1">
+                            {skill.tags.map((tag, tIdx) => (
+                              <span
+                                key={tIdx}
+                                className="text-[10px] font-medium px-2 py-0.5 rounded bg-muted text-muted-foreground"
+                              >
+                                #{tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -126,19 +141,18 @@ const Skills = () => {
           ))}
         </div>
 
-        {/* Call to Action */}
-        <div className="mt-16 text-center animate-fade-up">
-          <div className="bg-card border border-border rounded-xl p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-inter font-semibold text-card-foreground mb-4">
-              Ready to see these skills in action?
-            </h3>
-            <p className="text-foreground mb-6">
-              Explore my projects to see how I've applied these tools to solve real-world problems
-            </p>
-            <Link to="/projects" className="btn-primary" aria-label="View my projects page">
-              View My Projects
-            </Link>
-          </div>
+        {/* CTA */}
+        <div className="max-w-2xl mx-auto glass-panel p-8 sm:p-10 text-center animate-fade-up">
+          <h3 className="text-2xl font-bold text-foreground mb-3">
+            Want to see these skills in real analytics & ML projects?
+          </h3>
+          <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+            Review live case studies, code repositories, and publication reports demonstrating these tools on real datasets.
+          </p>
+          <Link to="/projects" className="btn-primary">
+            <span>Explore Projects</span>
+            <ArrowRight size={16} />
+          </Link>
         </div>
       </section>
     </div>

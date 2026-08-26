@@ -1,68 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 174 60% 98%; /* very light teal background */
-    --foreground: 174 60% 20%; /* dark teal text */
+    --background: 0 0% 99%;
+    --foreground: 224 71% 10%;
 
-    --card: 174 60% 99%;
-    --card-foreground: 174 60% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71% 10%;
 
-    --popover: 174 60% 99%;
-    --popover-foreground: 174 60% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71% 10%;
 
-    --primary: 174 60% 40%; /* teal accent */
+    --primary: 350 84% 54%; /* Vibrant Light Red / Rose */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 174 60% 95%;
-    --secondary-foreground: 174 60% 20%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 224 71% 10%;
 
-    --muted: 174 60% 97%;
-    --muted-foreground: 174 60% 40%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 174 60% 90%;
-    --accent-foreground: 174 60% 20%;
+    --accent: 350 100% 96%;
+    --accent-foreground: 350 84% 45%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 174 60% 80%;
-    --input: 174 60% 80%;
-    --ring: 174 60% 40%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 350 84% 54%;
 
-    --radius: 0.5rem;
+    --radius: 0.85rem;
   }
 
   .dark {
-    --background: 174 20% 15%; /* dark teal background */
-    --foreground: 174 20% 98%; /* light text */
+    --background: 224 71% 4%;
+    --foreground: 210 40% 98%;
 
-    --card: 174 20% 22%; /* slightly lighter dark teal for cards */
-    --card-foreground: 174 20% 98%; /* light text on cards */
+    --card: 222 47% 7%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 174 60% 10%;
-    --popover-foreground: 174 60% 98%;
+    --popover: 222 47% 7%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 174 60% 40%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 350 89% 65%; /* Radiant Rose Red */
+    --primary-foreground: 224 71% 4%;
 
-    --secondary: 174 60% 20%;
-    --secondary-foreground: 174 60% 98%;
+    --secondary: 217 33% 14%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 174 60% 20%;
-    --muted-foreground: 174 60% 80%;
+    --muted: 217 33% 14%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 174 60% 25%;
-    --accent-foreground: 174 60% 98%;
+    --accent: 350 80% 15%;
+    --accent-foreground: 350 89% 75%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 174 60% 30%;
-    --input: 174 60% 30%;
-    --ring: 174 60% 40%;
+    --border: 217 33% 16%;
+    --input: 217 33% 16%;
+    --ring: 350 89% 65%;
   }
 }
 
@@ -71,29 +73,93 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background dark:bg-background text-foreground dark:text-foreground font-ibm transition-colors duration-200;
+    @apply bg-background text-foreground font-sans antialiased selection:bg-primary/20 selection:text-primary transition-colors duration-300 min-h-screen flex flex-col;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-inter font-semibold;
+    @apply font-bold tracking-tight text-foreground;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
   }
 }
 
 @layer components {
+  /* Buttons */
   .btn-primary {
-    @apply bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:bg-primary/80 hover:scale-105 hover:shadow-lg;
+    @apply inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300
+    bg-gradient-to-r from-rose-600 via-red-500 to-rose-500 text-white shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40
+    hover:scale-[1.02] active:scale-[0.98] dark:from-rose-500 dark:via-red-400 dark:to-rose-400 dark:text-gray-950 dark:shadow-rose-500/25;
   }
   
   .btn-secondary {
-    @apply border-2 border-primary text-primary px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:bg-primary hover:text-primary-foreground hover:scale-105 hover:shadow-lg;
+    @apply inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300
+    border border-border/80 bg-card/60 backdrop-blur-md text-foreground hover:bg-accent/50 hover:border-primary/50
+    hover:scale-[1.02] active:scale-[0.98] shadow-sm hover:shadow-md;
   }
 
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200
+    text-muted-foreground hover:text-foreground hover:bg-accent/40;
+  }
+
+  /* Containers & Layouts */
   .section-container {
-    @apply max-w-6xl mx-auto px-8 py-16;
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20;
   }
 
-  .card-hover {
-    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  /* Cards & Glassmorphism */
+  .glass-panel {
+    @apply bg-card/75 dark:bg-card/60 backdrop-blur-xl border border-border/70 dark:border-white/10 shadow-xl shadow-black/5 dark:shadow-black/25 rounded-2xl transition-all duration-300;
+  }
+
+  .glass-card-hover {
+    @apply glass-panel hover:border-primary/40 dark:hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 dark:hover:shadow-primary/15 hover:-translate-y-1;
+  }
+
+  .glass-nav {
+    @apply sticky top-0 z-50 bg-background/80 dark:bg-background/80 backdrop-blur-md border-b border-border/60 transition-all duration-300;
+  }
+
+  /* Glow / Badges */
+  .badge-glow {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide
+    bg-rose-500/10 text-rose-600 dark:bg-rose-400/15 dark:text-rose-300 border border-rose-500/20 dark:border-rose-400/30 shadow-sm;
+  }
+
+  .badge-tag {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium
+    bg-secondary text-secondary-foreground border border-border/50 transition-colors hover:border-primary/40 hover:text-primary;
+  }
+
+  /* Text Gradients */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-rose-600 via-red-500 to-amber-500 dark:from-rose-400 dark:via-red-300 dark:to-amber-300;
+  }
+
+  .text-gradient-subtle {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground/90 to-muted-foreground;
+  }
+
+  /* Decorative Background Glows */
+  .glow-mesh {
+    background-image: 
+      radial-gradient(at 10% 20%, rgba(244, 63, 94, 0.07) 0px, transparent 50%),
+      radial-gradient(at 90% 80%, rgba(239, 68, 68, 0.06) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(251, 146, 60, 0.04) 0px, transparent 50%);
+  }
+
+  .dark .glow-mesh {
+    background-image: 
+      radial-gradient(at 15% 15%, rgba(244, 63, 94, 0.12) 0px, transparent 50%),
+      radial-gradient(at 85% 85%, rgba(239, 68, 68, 0.10) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(251, 146, 60, 0.06) 0px, transparent 50%);
   }
 }
