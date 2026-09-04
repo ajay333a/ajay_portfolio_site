@@ -48,7 +48,7 @@ const Navigation = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 sm:h-20">
+        <div className="flex justify-between items-center h-14 sm:h-16">
           {/* Logo / Name */}
           <Link
             to="/"

@@ -112,7 +112,7 @@
 
   /* Containers & Layouts */
   .section-container {
-    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20;
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12 sm:pt-6 sm:pb-16;
   }
 
   /* Cards & Glassmorphism */

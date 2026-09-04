@@ -32,7 +32,7 @@ const Index = () => {
   return (
     <div className="min-h-screen glow-mesh">
       {/* Hero Section */}
-      <section className="section-container !pt-6 !pb-6 sm:!pt-10 sm:!pb-8">
+      <section className="section-container !pt-2 !pb-6 sm:!pt-3 sm:!pb-8">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Hero Content */}
           <div className="lg:col-span-7 space-y-6 animate-fade-up">

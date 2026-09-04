@@ -28,7 +28,7 @@ const Certifications = () => {
   };
 
   return (
-    <div className="min-h-screen glow-mesh pt-6 pb-20">
+    <div className="min-h-screen glow-mesh pb-20">
       <section className="section-container">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-up">
